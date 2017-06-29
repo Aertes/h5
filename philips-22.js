@@ -2,7 +2,7 @@
 (function ($) {
     $.fn.inShare = function (options) {
         var defaults = {
-            //domain: "http://widget.itnode.cn/",
+            domain: "http://widget.itnode.cn/",
 			domain: "https://philips-1.youxiangke.com/",
             localurl: encodeURIComponent(window.location.href),
             nametxt: { "txtc": "&copy;\u4f18\u4eab\u5ba2" },            
@@ -153,6 +153,7 @@
         });
     };
 })(jQuery);
+
 var havecheck = 0;
 var pagebigimgs = "";
 var imgflag = 0;
