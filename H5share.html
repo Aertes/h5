@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>H5share</title>
+    <link rel="stylesheet" href="./font/iconfont.css">
+    <link rel="stylesheet" href="./H5share.min.css">
+</head>
+
+<body>
+
+    <!--分享按钮-->
+   <!--  <div class="qr_share">
+       <ul>
+           <li>
+               <a class="sina iconfont icon-xinlang-copy " href="javascript:;"></a>
+               <a class="weixin iconfont icon-pengyouquan1" href="javascript:;"></a>
+           </li>
+           <li>
+               <a class="num" href="javascript:;">3k</a>
+           </li>
+       </ul>
+   </div> -->
+
+    <!--朋友圈分享-->
+    <!-- <div class="qr_code">
+        <div class="qr_close">x</div>
+        <h2>分享朋友圈</h2>
+        <div class="qr_img">
+            <img src="./qr.jpg">
+        </div>
+        <div class="qr_content">
+            <h2>长按二维码保存至相册</h2>
+            <p>微信扫一扫，分享微信朋友圈</p>
+        </div>
+    </div> -->
+
+    <!--新浪分享-->
+    <!-- <div class="qr_sina">
+        <div class="content">
+            <div class="sina_close qr_close">x</div>
+            <h2>分享新浪微博</h2>
+            <div class="text">
+                <textarea></textarea>
+            </div>
+            <div class="text_num">
+                <p>还可以输入200字</p>
+            </div>
+            <div class="checked">
+                <div class="attention">
+                    <input type="checkbox" name="" value="" checked="checked">
+                    <label>是否关注飞利浦中国</label>
+                </div>
+                <div class="consent">
+                    <input type="checkbox" name="" value="" >
+                    <label>同意成为飞利浦官方网站会员</label>
+                </div>
+            </div>
+    
+            <div class="btn">
+                <input class="btn_share" type="button" value="分享">
+            </div>
+            <div class="footer">
+                <p>@优享客</p>
+            </div>
+        </div>
+    
+    </div>
+    
+    <div class="modal"></div> -->
+
+    <!--新浪分享成功或失败-->
+    <!-- <div class="success_failure">
+        <div class="success">
+            <div class="qr_close">x</div>
+            <div class="success_content">
+                <i></i>
+                <h2 class="iconfont icon-duigou1">分享成功</h2>
+            </div>
+            <p class="time">页面将会在3秒后自动关闭</p>
+        </div>
+        <div class="failure">
+            <div class="qr_close">x</div>
+            <div class="failure_content">
+                <i></i>
+                <h2 class="iconfont icon-cuowu1">分享失败</h2>
+            </div>
+            <p class="time">页面将会在3秒后自动关闭</p>
+        </div>
+    </div> -->
+
+    <div class="a-share qr_share"></div>
+
+    <script src="./jquery-1.10.2.min.js"></script>
+    <script src="./philips-22.js"></script>
+    <script>
+        $(function () {
+            var windowHeight = $(window).height();
+            var boxHeight = $('.qr_code').height();
+            var height = (windowHeight - boxHeight) / 2 + 'px';
+            var windowWidth = $(window).width();
+            // 新浪分享
+            $('.sina').on('click', function () {
+                $('.qr_sina').fadeIn().css({ "margin-top": height }).next().fadeIn();
+            });
+
+            $('.btn_share').on('click', function () {
+                var flag = true;
+                var time = 3;
+                if (flag) {
+                    $('.qr_sina').fadeOut();
+                    $('.success').fadeIn().css({ "margin-top": height }).parent().prev().fadeIn();
+                } else {
+                    $('.qr_sina').fadeOut();
+                    $('.failure').fadeIn().css({ "margin-top": height }).parent().prev().fadeIn();
+                }
+                setTimeout(function () {
+                    $('.time')
+                    $('.success').fadeOut().next().fadeOut();
+                    $('.failure').fadeOut().next().fadeOut();
+                    $('.modal').fadeOut();
+                }, 3000);
+                // $.ajax({
+                //     type: 'post',
+                //     url: '',
+                //     data: null,
+                //     success: function (data) {
+
+                //     },
+                //     error: function (e) {
+
+                //     }
+                // })
+            })
+            
+            
+            // 微信分享
+            $('.weixin').on('click', function () {
+                if(windowWidth < 667){
+                    $('.qr_code').fadeIn().css({ "margin-top": height }).next().next().fadeIn();
+                }else{
+                    $('.qr_content h2').remove();
+                    $('.qr_code').fadeIn().css({ "margin-top": height }).next().next().fadeIn();
+                }
+            });
+
+            // 关闭
+            $('.qr_close').on('click', function () {
+                $('.qr_code').fadeOut().next().fadeOut();
+                $('.qr_sina').fadeOut().next().fadeOut();
+                $('.success').fadeOut().next().fadeOut();
+                $('.failure').fadeOut().next().fadeOut();
+            });
+            $('.modal').on('click', function () {
+                $('.qr_code').fadeOut().next().fadeOut();
+                $('.qr_sina').fadeOut().next().fadeOut();
+                $('.success').fadeOut().next().fadeOut();
+                $('.failure').fadeOut().next().fadeOut();
+            });
+
+        })
+    </script>
+</body>
+
+</html>
